@@ -7,8 +7,8 @@ import {useToast} from "@/components/ui/use-toast";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store/store";
 import axios from "axios";
-import {backendUrl} from "@/lib/utils";
 
+import {backendUrl} from "@/lib/utils";
 const Home = () => {
     const {toast} = useToast()
     const token = useSelector((state: RootState) => state.auth.token);

@@ -11,9 +11,6 @@ import Link from "next/link";
 import axios from "axios";
 import {useRouter} from "next/navigation";
 import {useToast} from "@/components/ui/use-toast";
-import {login} from "@/store/authSlice";
-import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "@/store/store";
 import useAuth from "@/hooks/authHook";
 import {backendUrl} from "@/lib/utils";
 
