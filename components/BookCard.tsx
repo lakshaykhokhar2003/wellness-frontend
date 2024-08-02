@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from '@/components/ui/Card'
-import {Button} from '@/components/ui/Button'
+import {Button} from '@/components/ui/button'
 import Image from 'next/image'
 
 const BookCard = ({book, onAddFavorite}: { book: Record<string, string>, onAddFavorite: Function }) => {
