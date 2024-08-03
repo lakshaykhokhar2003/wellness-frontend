@@ -8,6 +8,7 @@ const SearchBar = ({onSearch}) => {
             type="text"
             placeholder="Search for books..."
             onChange={(e) => onSearch(e.target.value)}
+            className="w-full mt-4 mb-4"
         />
     );
 };

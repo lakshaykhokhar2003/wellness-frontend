@@ -57,6 +57,10 @@ const RegisterForm = () => {
             })
             loginHandler(response.data.id,response.data.email, response.data.token)
             form.reset();
+            toast({
+                title: "Login successful",
+                description: "You have been successfully logged in.",
+            })
             router.push('/')
         } catch (e) {
             toast({

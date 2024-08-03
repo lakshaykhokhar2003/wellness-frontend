@@ -41,8 +41,13 @@ const LoginForm = () => {
     const onSubmit = async (data: LoginFormInputs) => {
         try {
             const response = await axios.post(`${backendUrl}/login`, data)
+            console.log(response.data,response.data._id)
             loginHandler(response.data._id,response.data.email, response.data.token)
             form.reset();
+            toast({
+                title: "Login successful",
+                description: "You have been successfully logged in.",
+            })
             router.push('/')
         } catch (e) {
             toast({

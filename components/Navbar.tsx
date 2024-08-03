@@ -1,20 +1,31 @@
-"use client"
+"use client";
 
-import React, {Fragment} from "react"
-import Link from "next/link"
-import {Menu, Transition} from "@headlessui/react"
-import {ChevronDownIcon} from "lucide-react";
+import React, {Fragment} from "react";
+import Link from "next/link";
+import {Menu, Transition} from "@headlessui/react";
+import {ChevronDownIcon, User} from "lucide-react"; // Import the User icon for avatar
 import {useRouter} from "next/navigation";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/store/store";
 import {logout} from "@/store/authSlice";
+import {useToast} from "@/components/ui/use-toast";
 
 const Navbar: React.FC = () => {
-    const dispatch = useDispatch()
-    const auth = useSelector((state: RootState) => state.auth.authState)
-    const id = useSelector((state: RootState) => state.auth.id)
-    const router = useRouter()
-    const logoutHandler = () => dispatch(logout())
+    const dispatch = useDispatch();
+    const auth = useSelector((state: RootState) => state.auth.authState);
+    const id = useSelector((state: RootState) => state.auth.id);
+    const email = useSelector((state: RootState) => state.auth.email);
+    const router = useRouter();
+    const {toast} = useToast();
+
+    const logoutHandler = () => {
+        dispatch(logout());
+        toast({
+            title: "Logout successful",
+            description: "You have been successfully logged out.",
+        });
+        router.push('/')
+    };
 
     return (
         <nav className="bg-card text-card-foreground p-4 shadow">
@@ -50,8 +61,8 @@ const Navbar: React.FC = () => {
                         <Menu as="div" className="relative inline-block text-left">
                             <div>
                                 <Menu.Button
-                                    className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-card text-card-foreground hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
-                                    Account
+                                    className="inline-flex items-center justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-card text-card-foreground hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+                                    <User className="h-5 w-5" aria-hidden="true"/> {/* Avatar icon */}
                                     <ChevronDownIcon className="ml-2 -mr-1 h-5 w-5" aria-hidden="true"/>
                                 </Menu.Button>
                             </div>
@@ -68,6 +79,11 @@ const Navbar: React.FC = () => {
                                 <Menu.Items
                                     className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <div className="py-1">
+                                        {email && (
+                                            <div className="px-4 py-2 text-sm text-gray-700 overflow-clip">
+                                                {email}
+                                            </div>
+                                        )}
                                         <Menu.Item>
                                             {({active}) => (
                                                 <button
@@ -88,7 +104,7 @@ const Navbar: React.FC = () => {
                 </div>
             </div>
         </nav>
-    )
-}
+    );
+};
 
-export default Navbar
+export default Navbar;
