@@ -13,6 +13,8 @@ import axios, {AxiosResponse} from "axios";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store/store";
 import {backendUrl} from "@/lib/utils";
+import {useToast} from "@/components/ui/use-toast";
+import {useRouter} from "next/navigation";
 
 const formSchema = z.object({
     title: z.string().min(2, {
@@ -40,6 +42,8 @@ type BookFormInputs = z.infer<typeof formSchema>;
 
 
 const BookForm = () => {
+    const router = useRouter()
+    const {toast} = useToast()
     const token = useSelector((state: RootState) => state.auth.token);
     const form = useForm<BookFormInputs>({
         resolver: zodResolver(formSchema),
@@ -64,6 +68,11 @@ const BookForm = () => {
             })
 
             form.reset()
+            toast({
+                title: "Book added",
+                description: "The book has been added successfully.",
+            })
+            router.push('/')
         } catch (err) {
             console.error(err)
         }
