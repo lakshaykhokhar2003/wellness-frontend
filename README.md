@@ -16,7 +16,15 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+NOTE: The backend server is deployed on render.com, It takes a few seconds to start the server. If you see a 404 error, please wait for a few seconds and refresh the page.
+
+## Protected Routes
+
+The following routes are protected and require authentication:
+
+- /[userId] - User's bookmarks profile page
+- /add-bookmark - Add a new book
+
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
