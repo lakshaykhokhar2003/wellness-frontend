@@ -10,6 +10,7 @@ import axios from "axios";
 import { backendUrl } from "@/lib/utils";
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from "next/navigation";
+import {Loader} from "@/components/Loader";
 
 const fetchBooks = async () => {
     const res = await axios.get(`${backendUrl}/api/books`);
@@ -89,7 +90,7 @@ const Home = () => {
         addBookmark({ userId: id, bookId, token });
     };
 
-    if (booksLoading || bookmarksLoading) return <div>Loading...</div>;
+    if (booksLoading || bookmarksLoading) return <Loader/>;
     if (booksError || bookmarksError) return <div>Error loading books or bookmarks</div>;
 
     const bookmarkedIds = bookmarks.map((bookmark: any) => bookmark._id);

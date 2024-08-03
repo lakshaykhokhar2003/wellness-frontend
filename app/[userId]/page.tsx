@@ -10,6 +10,7 @@ import {backendUrl} from "@/lib/utils";
 import {useQuery, useMutation, useQueryClient} from '@tanstack/react-query';
 import {useRouter} from "next/navigation";
 import Image from "next/image";
+import {Loader} from "@/components/Loader";
 
 const fetchBooks = async (userId: string) => {
     const res = await axios.get(`${backendUrl}/users/${userId}/bookmark`);
@@ -77,7 +78,7 @@ const Favorites = ({params}: { params: { userId: string } }) => {
         addBookmark({userId, bookId, token});
     };
 
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading) return <Loader/>;
     if (isError) return <div>Error loading books</div>;
 
     const bookIds = books.map((book: any) => book._id);
