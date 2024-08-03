@@ -175,7 +175,7 @@ const BookForm = () => {
                                 <Input placeholder="Image URL" {...field} />
                             </FormControl>
                             <FormDescription>
-                                The URL of the book&aspos;s cover image.
+                                The URL of the book's cover image.
                             </FormDescription>
                             <FormMessage/>
                         </FormItem>
